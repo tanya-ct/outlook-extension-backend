@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import email
 from app.database import engine, Base
-
+from app.routes import auth 
 # Optional: create tables (in dev only — use Alembic in prod)
 # Base.metadata.create_all(bind=engine)
 
@@ -23,7 +23,7 @@ app.add_middleware(
 
 # Routers
 app.include_router(email.router, prefix="/api", tags=["Emails"])
-
+app.include_router(auth.router)
 # Health check
 @app.get("/")
 def root():
