@@ -4,6 +4,10 @@ from app.database import get_db  ## DB session dependency
 from app.services.ms_graph import fetch_email_by_id
 from app.services.email_parser import save_email_to_db
 import httpx
+from datetime import datetime
+from app.models.email import Email
+
+
 router = APIRouter()
 
 GRAPH_URL = "https://graph.microsoft.com/v1.0/me/messages"
@@ -36,7 +40,7 @@ async def fetch_emails(Authorization: str = Header(...), db: Session = Depends(g
     """
     Fetch emails using Microsoft Graph API and save to the database
     """
-    if not Authorization.startswith("Bearer "):
+    if not Authorization.startswith("Bearer"):
         raise HTTPException(status_code=401, detail="Invalid token")
 
     access_token = Authorization.split(" ")[1]

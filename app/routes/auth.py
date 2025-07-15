@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, status
 from fastapi.responses import RedirectResponse, JSONResponse
 from urllib.parse import urlencode
 import httpx
@@ -40,8 +40,10 @@ async def auth_callback(request: Request):
         "scope": SCOPE,
     }
     async with httpx.AsyncClient() as client:
-        token_response = await client.post(TOKEN_URL, data=data, headers={"Content-Type": "application/x-www-form-urlencoded"})
-
+        token_response = await client.post(TOKEN_URL, data=data, 
+            headers={"Content-Type": "application/x-www-form-urlencoded"})
+    print("Status Code:", token_response.status_code)
+    print("Text Response:", token_response.text)
     if token_response.status_code != 200:
         return JSONResponse({"error": "Token exchange failed", "details": token_response.json()}, status_code=token_response.status_code)
 
