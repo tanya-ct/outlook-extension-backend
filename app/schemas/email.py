@@ -39,6 +39,7 @@ class EmailThreadSchema(BaseModel):
 
 class EmailSchema(BaseModel):
     id: Optional[uuid.UUID]
+    ms_graph_id = str
     org_id: Optional[str]
     admin_mail_id: Optional[str]
     subject: Optional[str]

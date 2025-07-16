@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import email
 from app.database import engine, Base
 from app.routes import auth 
+from app.routes.email import router as email_router
+
 # Optional: create tables (in dev only — use Alembic in prod)
 # Base.metadata.create_all(bind=engine)
 
@@ -24,7 +26,9 @@ app.add_middleware(
 # Routers
 app.include_router(email.router, prefix="/api", tags=["Emails"])
 app.include_router(auth.router)
-# Health check
+app.include_router(email_router) 
+
+
 @app.get("/")
 def root():
     return {"status": "ok", "message": "Email backend is running."}

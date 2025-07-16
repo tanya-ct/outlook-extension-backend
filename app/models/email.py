@@ -12,6 +12,7 @@ class Email(Base):
     __tablename__ = "emails"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ms_graph_id = Column(String, unique=True, index=True)
     org_id = Column(String)
     admin_mail_id = Column(String)
     subject = Column(String)

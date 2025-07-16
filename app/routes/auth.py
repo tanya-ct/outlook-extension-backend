@@ -6,7 +6,7 @@ from app.config import settings
 
 router = APIRouter()
 
-AUTHORITY = f"https://login.microsoftonline.com/{settings.azure_tenant_id}"
+AUTHORITY = "https://login.microsoftonline.com/common"
 AUTH_URL = f"{AUTHORITY}/oauth2/v2.0/authorize"
 TOKEN_URL = f"{AUTHORITY}/oauth2/v2.0/token"
 SCOPE = "User.Read Mail.Read"  
