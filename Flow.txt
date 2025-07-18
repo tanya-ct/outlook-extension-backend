@@ -1,0 +1,33 @@
+1. Save email 
+-- pre - req's
+    a. bearer token 
+    b. graph url 
+    c. email msg unique id 
+
+-- flow 
+
+    a. user hits save 
+    b. On save backend calls /me/message/id end-point 
+    c. endpoint hits graph url with id 
+    d. saves whole response
+    e. check for duplicate
+    f. check attachment 
+            a. has attachment 
+                i. push to aws bucket 
+                ii. get aws bucket link 
+    g. check has thread 
+            a. has thread 
+                i. FIGURE OUT THIS 
+    e. response decoded into pydantic object 
+    f. pydantic obj pushed into db via sqlalchemy 
+    g. email data saved in email table
+    h. attachment link saved in attachment table 
+
+
+
+2. Save only 1 Document 
+
+3. Save multiple Document 
+
+4. Zipped folder (if required unzip it)
+5. 
